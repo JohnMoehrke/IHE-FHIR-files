@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2017-07-20T18:12:55.24-05:00" />
+  </meta>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-wg">
+    <valueCode value="sec" />
+  </extension>
+  <url value="http://ihe.net/fhir/StructureDefinition/QEDmProvenance" />
+  <name value="QEDmProvenance" />
+  <status value="draft" />
+  <date value="2017-07-20T17:06:18.9530707-05:00" />
+  <fhirVersion value="3.0.1" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Provenance" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Provenance" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Provenance.policy">
+      <path value="Provenance.policy" />
+      <fixedUri value="urn:ihe:pcc:qedm:2017:document-provenance-policy" />
+    </element>
+    <element id="Provenance.agent.role.coding.system">
+      <path value="Provenance.agent.role.coding.system" />
+      <fixedUri value="http://hl7.org/fhir/v3/ParticipationFunction" />
+    </element>
+    <element id="Provenance.agent.role.coding.code">
+      <path value="Provenance.agent.role.coding.code" />
+      <fixedCode value="ASSEMBLER" />
+    </element>
+    <element id="Provenance.agent.role.coding.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Provenance.agent.role.coding.display" />
+      <definition value="A device that operates independently of an author on custodian's algorithms for data extraction of existing information for purpose of generating a new artifact. UsageConstraint: ASSEMBLER ParticipationFunction should be used with DEV (device) ParticipationType." />
+      <fixedString value="assembly software" />
+    </element>
+    <element id="Provenance.agent.who[x]:whoUri">
+      <path value="Provenance.agent.whoUri" />
+      <sliceName value="whoUri" />
+      <definition value="The software or service identifier that has extracted the target from the documents" />
+      <type>
+        <code value="uri" />
+      </type>
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance">
+      <path value="Provenance.entity" />
+      <sliceName value="QEDm-Provenance" />
+      <slicing>
+        <discriminator>
+          <type value="pattern" />
+          <path value="what[x]" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <definition value="Document from which the target was sourced" />
+      <min value="1" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance.role">
+      <path value="Provenance.entity.role" />
+      <fixedCode value="source" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance.what[x]:whatReference">
+      <path value="Provenance.entity.whatReference" />
+      <sliceName value="whatReference" />
+      <definition value="Reference to a DocumentReference that describes the document from which the target was sourced." />
+      <min value="0" />
+      <type>
+        <code value="Reference" />
+        <profile value="DocumentReference" />
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/Resource" />
+      </type>
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance.agent">
+      <path value="Provenance.entity.agent" />
+      <max value="0" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance:MHD Documet">
+      <path value="Provenance.entity" />
+      <sliceName value="MHD Documet" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance:MHD Documet.role">
+      <path value="Provenance.entity.role" />
+      <fixedCode value="source" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance:MHD Documet.what[x]">
+      <path value="Provenance.entity.what[x]" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/Resource" />
+      </type>
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance:XDS Document">
+      <path value="Provenance.entity" />
+      <sliceName value="XDS Document" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance:XDS Document.role">
+      <path value="Provenance.entity.role" />
+      <fixedCode value="source" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance:XDS Document.what[x]">
+      <path value="Provenance.entity.what[x]" />
+      <type>
+        <code value="Identifier" />
+      </type>
+    </element>
+    <element>
+      <path value="Provenance.entity.what[x].system" />
+      <short value="XDS RepositoryUniqueId" />
+      <definition value="RepositoryUniqueId of the Repository at which this document is found. Where the RepositoryUniqueID is encoded as a URI using urn:oid: encoding." />
+    </element>
+    <element>
+      <path value="Provenance.entity.what[x].value" />
+      <short value="Document UniqueId" />
+      <definition value="UniqueID of the Document" />
+    </element>
+    <element id="Provenance.entity:QEDm-Provenance:other">
+      <path value="Provenance.entity" />
+      <sliceName value="other" />
+    </element>
+  </differential>
+</StructureDefinition>
